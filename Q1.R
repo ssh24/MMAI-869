@@ -17,3 +17,16 @@ cutree(hclust.complete, k=1)
 cutree(hclust.complete, k=2)
 cutree(hclust.complete, k=3)
 
+# PART C - heirarchically cluster the states again, this time by scaling to have a sd=1
+
+# scale the original dataset for all of the features have standard deviation=1
+ds.scaled <- scale(ds)
+colMeans(ds.scaled)
+apply(ds.scaled, 2, sd)
+
+# calculate the Euclidian matrix
+dist_matrix_scaled <- dist(ds.scaled)
+
+# cluster the new scaled dataset using hclust complete linkage
+hclust.scaled_complete <- hclust(dist_matrix_scaled, method="complete")
+plot(hclust.scaled_complete)
